@@ -1,11 +1,24 @@
-from transformers import AlbertTokenizer, AlbertForSequenceClassification
-import os
-from dotenv import load_dotenv
+from fastapi import FastAPI
+from contextlib import asynccontextmanager
+from src.db import init_db
+from src.moderation import load_model
+from src.routes import router
 
-load_dotenv()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    print("Starting up...")
+    init_db()
+    load_model()
+    yield
+    print("Shutting down...")
 
-tokenizer = AlbertTokenizer.from_pretrained(os.getenv("TRAINED_MODEL_PATH"))
-model = AlbertForSequenceClassification.from_pretrained(os.getenv("TRAINED_MODEL_PATH"))
-# Quick test
-inputs = tokenizer("You idiot", return_tensors="pt")
-print(model(**inputs).logits)
+app = FastAPI(
+    title="SafeSocial - ALBERT Moderated Chat",
+    lifespan=lifespan
+)
+
+app.include_router(router)
+
+@app.get("/")
+def root():
+    return {"message": "SafeSocial API running with clean architecture!"}

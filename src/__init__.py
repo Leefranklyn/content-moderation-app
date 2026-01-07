@@ -1,3 +1,5 @@
-from fastapi import FastAPI, HTTPException
+# from fastapi import FastAPI, HTTPException
 
-app = FastAPI(title="Content Moderation Chat App", version="1.0.0")
+# app = FastAPI(title="Content Moderation Chat App", version="1.0.0")
+
+from .moderation import load_model, moderate_text

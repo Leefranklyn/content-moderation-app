@@ -1,3 +1,5 @@
 .venv/
 albert_toxicity_moderator/
 .env
+__pycache__/
+src/__pycache__

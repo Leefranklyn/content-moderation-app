@@ -20,8 +20,8 @@ LABELS = ["toxicity", "threat", "insult", "sexual_explicit", "obscene"]
 def load_model():
     global tokenizer, model
     print("Loading ALBERT toxicity model from ./albert_toxicity_moderator ...")
-    tokenizer = AlbertTokenizer.from_pretrained(Config.MODEL_NAME, local_files_only=True)
-    model = AlbertForSequenceClassification.from_pretrained(Config.MODEL_NAME, local_files_only=True)
+    tokenizer = AlbertTokenizer.from_pretrained(Config.MODEL_PATH)
+    model = AlbertForSequenceClassification.from_pretrained(Config.MODEL_PATH)
     model.eval()
     print("Model loaded successfully!")
 
