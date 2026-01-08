@@ -2,6 +2,10 @@ from typing import List, Optional
 from pydantic import BaseModel
 from datetime import datetime
 
+
+class UserCreate(BaseModel):
+    username: str
+    password: str
 class PostCreate(BaseModel):
     content: str
     author: str

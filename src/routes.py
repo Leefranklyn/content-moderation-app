@@ -1,13 +1,17 @@
 from fastapi import APIRouter
 from typing import List
-from .schemas import PostResponse, CommentResponse, PostCreate, CommentCreate
-from .services import register_user, create_new_post, create_new_comment, get_all_posts
+from .schemas import UserCreate, PostResponse, CommentResponse, PostCreate, CommentCreate
+from .services import login_user, register_user, create_new_post, create_new_comment, get_all_posts
 
 router = APIRouter()
 
 @router.post("/register")
-def register(username: str):
-    return register_user(username)
+def register(user: UserCreate):
+    return register_user(user.username, user.password)
+
+@router.post("/login")
+def login(user: UserCreate):
+    return login_user(user.username, user.password)
 
 @router.post("/posts", response_model=PostResponse)
 def create_post(post: PostCreate):

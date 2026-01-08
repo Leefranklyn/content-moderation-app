@@ -3,6 +3,7 @@ from datetime import datetime
 
 class User(Document):
     username = StringField(required=True, unique=True)
+    password = StringField(required=True)
     meta = {'collection': 'users'}
 
 class Post(Document):
