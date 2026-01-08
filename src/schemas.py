@@ -8,23 +8,23 @@ class UserCreate(BaseModel):
     password: str
 class PostCreate(BaseModel):
     content: str
-    author: str
 
 class CommentCreate(BaseModel):
     content: str
-    author: str
     post_id: str
 
 class CommentResponse(BaseModel):
     id: str
     content: str
     author: str
+    # author_name: str
     created_at: datetime
 
 class PostResponse(BaseModel):
     id: str
     content: str
     author: str
+    # author_name: str
     created_at: datetime
     comments: List[CommentResponse] = []
 

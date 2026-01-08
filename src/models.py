@@ -1,4 +1,4 @@
-from mongoengine import Document, StringField, DateTimeField, ReferenceField, ListField
+from mongoengine import Document, StringField, DateTimeField, ReferenceField, ListField, ObjectIdField
 from datetime import datetime
 
 class User(Document):
@@ -8,15 +8,15 @@ class User(Document):
 
 class Post(Document):
     content = StringField(required=True)
-    author = StringField(required=True)
+    author = ReferenceField(User, required=True)
     created_at = DateTimeField(default=datetime.utcnow)
-    comments = ListField(ReferenceField('Comment'))
+    # comments = ListField(ReferenceField('Comment'))
 
     meta = {'collection': 'posts', 'ordering': ['-created_at']}
 
 class Comment(Document):
     content = StringField(required=True)
-    author = StringField(required=True)
+    author = ReferenceField(User, required=True)
     post = ReferenceField(Post, required=True)
     created_at = DateTimeField(default=datetime.utcnow)
 
