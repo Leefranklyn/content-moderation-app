@@ -12,6 +12,7 @@ class PostCreate(BaseModel):
 class CommentCreate(BaseModel):
     content: str
     post_id: str
+    parent_comment_id: Optional[str] = None  # <--- Add this
 
 class CommentResponse(BaseModel):
     id: str
@@ -19,6 +20,9 @@ class CommentResponse(BaseModel):
     author: str
     # author_name: str
     created_at: datetime
+    likes: Optional[int] = 0
+    dislikes: Optional[int] = 0
+    replies: Optional[List['CommentResponse']] = []
 
 class PostResponse(BaseModel):
     id: str
@@ -26,6 +30,8 @@ class PostResponse(BaseModel):
     author: str
     # author_name: str
     created_at: datetime
+    likes: Optional[int] = 0
+    dislikes: Optional[int] = 0
     comments: List[CommentResponse] = []
 
 class ModerationResponse(BaseModel):
