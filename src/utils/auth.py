@@ -1,4 +1,3 @@
-# utils/auth.py
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 
@@ -6,15 +5,15 @@ import jwt
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from mongoengine.errors import DoesNotExist
-from src.config import Config
-from src.models import User
-from utils.security import verify_password  
+from ..config import Config
+from ..user.model import User
+from .security import verify_password  
 
 SECRET_KEY = Config.SECRET_KEY
 ALGORITHM = Config.ALGORITHM
 ACCESS_TOKEN_EXPIRE_HOURS = Config.ACCESS_TOKEN_EXPIRE_HOURS
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")  # for OpenAPI docs
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login") 
 
 def create_access_token(user_id: str, expires_delta: Optional[timedelta] = None) -> str:
     expire = datetime.now(timezone.utc) + (expires_delta or timedelta(hours=int(ACCESS_TOKEN_EXPIRE_HOURS)))

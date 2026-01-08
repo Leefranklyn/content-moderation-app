@@ -12,7 +12,7 @@ class PostCreate(BaseModel):
 class CommentCreate(BaseModel):
     content: str
     post_id: str
-    parent_comment_id: Optional[str] = None  # <--- Add this
+    parent_comment_id: Optional[str] = None
 
 class CommentResponse(BaseModel):
     id: str

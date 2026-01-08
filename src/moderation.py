@@ -6,7 +6,7 @@ from .config import Config
 # Global model & tokenizer
 tokenizer = None
 model = None
-device = "cpu"  # You're using CPU-only Torch
+device = "cpu"  
 
 # Vulgar words (expand as needed)
 VULGAR_WORDS = [
