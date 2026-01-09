@@ -18,7 +18,7 @@ class CommentResponse(BaseModel):
     id: str
     content: str
     author: str
-    # author_name: str
+    author_name: str
     created_at: datetime
     likes: Optional[int] = 0
     dislikes: Optional[int] = 0
@@ -28,7 +28,7 @@ class PostResponse(BaseModel):
     id: str
     content: str
     author: str
-    # author_name: str
+    author_name: str
     created_at: datetime
     likes: Optional[int] = 0
     dislikes: Optional[int] = 0
