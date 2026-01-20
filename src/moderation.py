@@ -29,13 +29,13 @@ def moderate_text(text: str) -> dict:
     text = text.strip()
 
     # 1. Vulgar word check
-    if VULGAR_PATTERN.search(text):
-        return {
-            "safe": False,
-            "reason": "vulgar_language",
-            "message": "Blocked: contains prohibited vulgar word(s)",
-            "scores": None
-        }
+    # if VULGAR_PATTERN.search(text):
+    #     return {
+    #         "safe": False,
+    #         "reason": "vulgar_language",
+    #         "message": "Blocked: contains prohibited vulgar word(s)",
+    #         "scores": None
+    #     }
 
     # 2. ALBERT inference
     inputs = tokenizer(text, return_tensors="pt", truncation=True, padding=True, max_length=128)
@@ -49,6 +49,6 @@ def moderate_text(text: str) -> dict:
     return {
         "safe": not is_toxic,
         "reason": "toxic_content" if is_toxic else "safe",
-        "message": "Blocked: toxic content detected" if is_toxic else "Safe to post",
+        "message": "Posting failed. Post contains toxic content." if is_toxic else "Safe to post",
         "scores": scores if is_toxic else None
     }
